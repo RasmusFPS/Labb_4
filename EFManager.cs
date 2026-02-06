@@ -37,6 +37,8 @@ namespace Labb_4
 
         internal static void StudentInfo()
         {
+            Console.Clear();
+
             using (var context = new Labb4Context())
             {
                 var info = context.Students.Select(s => new

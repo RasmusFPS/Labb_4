@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
@@ -150,10 +151,147 @@ namespace Labb_4
                 {
                     Console.WriteLine(ex.Message); 
                 }
+                connection.Close();
+
                 Console.WriteLine("Press AnyKey to Continue");
                 Console.ReadKey();
             }
     
+        }
+
+        internal static void GetSalary()
+        {
+            Console.Clear();
+
+            Console.WriteLine("----Salary----");
+
+            string query = "SELECT DepartmentName,SUM(Salary) as Total FROM Staff s JOIN Departments d on s.DepartmentID = d.DepartmentID GROUP BY DepartmentName";
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    using (var reader = new SqlCommand(query, connection).ExecuteReader())
+                    {
+                        while (reader.Read()) Console.WriteLine($"Department {reader["DepartmentName"]}: {reader["Total"]:c} /month");
+                    }
+
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+            }
+
+            Console.Write("\nPress AnyKey to Continue");
+            Console.ReadKey();
+        }
+
+        internal static void AvgSalary()
+        {
+            Console.Clear();
+
+            Console.WriteLine("----Salary----");
+
+            string query = "SELECT DepartmentName,AVG(Salary) as Avgsal FROM Staff s JOIN Departments d on s.DepartmentID = d.DepartmentID GROUP BY DepartmentName";
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    using (var reader = new SqlCommand(query, connection).ExecuteReader())
+                    {
+                        while (reader.Read()) Console.WriteLine($"Department {reader["DepartmentName"]}: {reader["Avgsal"]:c} Avg");
+                    }
+
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+            }
+
+            Console.Write("\nPress AnyKey to Continue");
+            Console.ReadKey();
+        }
+
+        internal static void StudentDetails(int studentid)
+        {
+            Console.Clear();
+            Console.WriteLine("----Student Info----");
+
+            using(var connection = new SqlConnection(_connectionString))
+            {
+                using (var command = new SqlCommand("GetStudentDetails", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Id", studentid);
+
+                    try
+                    {
+                        connection.Open();
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Console.WriteLine($"NAME {reader["StudentName"]}");
+                                Console.WriteLine($"SSN {reader["SSN"]}");
+                                Console.WriteLine($"CLASS {reader["ClassName"]}");
+                                Console.WriteLine($"MENTOR {reader["TeacherName"]}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("No one with this ID");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+
+            Console.WriteLine("\nPress AnyKey to Continue");
+            Console.ReadKey();
+        }
+
+        internal static void SetGrade(int studentId, int teacherId, int subjectId, string grade)
+        {
+            Console.Clear();
+            Console.WriteLine("----Set Grade----");
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    string query = @"INSERT INTO Grades (StudentID, TeacherID, SubjectID, Grade, GradeDate) 
+                             VALUES (@sid, @tid, @sub, @grade, GETDATE())";
+
+                    using (var command = new SqlCommand(query, connection, transaction))
+                    {
+                        command.Parameters.AddWithValue("@sid", studentId);
+                        command.Parameters.AddWithValue("@tid", teacherId);
+                        command.Parameters.AddWithValue("@sub", subjectId);
+                        command.Parameters.AddWithValue("@grade", grade);
+
+                        try
+                        {
+                            command.ExecuteNonQuery();
+
+                            transaction.Commit();
+                            Console.WriteLine("Success");
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            Console.WriteLine("Transaction Failed No data was saved.");
+                            Console.WriteLine("Error Message: " + ex.Message);
+                        }
+                    }
+                }
+            }
+
+            Console.WriteLine("\nPress AnyKey to Continue");
+            Console.ReadKey();
         }
     }
 
