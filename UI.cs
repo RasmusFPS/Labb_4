@@ -8,15 +8,15 @@ namespace Labb_4
 {
     internal class UI
     {
-        internal static void ui()
+        internal static void start()
         {
             bool running = true;
             while (running)
             {
                 Console.Clear();
-                Console.WriteLine("===== SCHOOL MANAGEMENT SYSTEM =====");
+                Console.WriteLine("SCHOOL MANAGEMENT SYSTEM");
                 Console.WriteLine("1.  Teachers per Department");
-                Console.WriteLine("2.  Show All Students");
+                Console.WriteLine("2.  Student info");
                 Console.WriteLine("3.  List Active Courses");
                 Console.WriteLine("4.  Staff Overview");
                 Console.WriteLine("5.  Add New Staff Member");
@@ -33,10 +33,13 @@ namespace Labb_4
                 switch (choice)
                 {
                     case "1":
+                        EFManager.DepartmentCount();
                         break;
                     case "2":
+                        EFManager.StudentInfo();
                         break;
                     case "3":
+                        EFManager.ActiveCourses();
                         break;
                     case "4":
                         break;
