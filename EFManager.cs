@@ -53,8 +53,6 @@ namespace Labb_4
                     Console.WriteLine($"ID {i.sID} || {i.FName} {i.Lname} {i.Class}");
                 }
 
-                Console.WriteLine("\nPress AnyKey to continue");
-                Console.ReadKey();
             }
         }
 

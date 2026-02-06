@@ -37,15 +37,20 @@ namespace Labb_4
                         break;
                     case "2":
                         EFManager.StudentInfo();
+                        Console.WriteLine("\nPress AnyKey to continue");
+                        Console.ReadKey();
                         break;
                     case "3":
                         EFManager.ActiveCourses();
                         break;
                     case "4":
+                        AdoManager.PrintTeachers();
                         break;
                     case "5":
+                        AdoManager.SaveStaffPrompt();
                         break;
                     case "6":
+                        GetId();
                         break;
                     case "7":
                         break;
@@ -60,5 +65,25 @@ namespace Labb_4
                 }
             }
         }
+
+        internal static void GetId()
+        {
+            Console.Clear();
+
+            EFManager.StudentInfo();
+
+            Console.Write("\nEnter Id:");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                AdoManager.GetStudentGrades(id);
+            }
+            else
+            {
+                Console.WriteLine("Invalid Id. Press Anykey to Continue");
+                Console.ReadKey();
+            }
+        }
+
+
     }
 }
