@@ -48,9 +48,10 @@ namespace Labb_4
                         AdoManager.PrintTeachers();
                         break;
                     case "5":
-                        AdoManager.SaveStaffPrompt();
+                        AdoManager.SaveStaff();
                         break;
                     case "6":
+                        EFManager.StudentInfo();
                         id = GetId("\nEnter Student ID:");
                         AdoManager.GetStudentGrades(id);
                         break;
