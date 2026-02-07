@@ -214,6 +214,28 @@ namespace Labb_4
             Console.ReadKey();
         }
 
+        internal static void SaveStaffPrompt()
+        {
+            Console.Write("First Name: "); string fName = Console.ReadLine();
+            Console.Write("Last Name: "); string lName = Console.ReadLine();
+            Console.Write("Role ID (1:Teacher, 2:Principal, 3:Admin): "); int rId = int.Parse(Console.ReadLine());
+            Console.Write("Department ID (1-4): "); int dId = int.Parse(Console.ReadLine());
+            if (dId > 4 && dId > 0)
+            {
+                Console.WriteLine("invalid");
+                return;
+
+            }
+            Console.Write("Salary: "); decimal salary = decimal.Parse(Console.ReadLine());
+            if (salary <= 0 && salary >= 100000)
+            {
+                Console.WriteLine("invalid");
+                salary = 0;
+            }
+            NewStaff(fName, lName, rId, dId, salary);
+        }
+
+
         internal static void SetGrade(int studentId, int teacherId, int subjectId, string grade)
         {
             Console.Clear();
