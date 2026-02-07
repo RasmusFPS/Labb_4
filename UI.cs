@@ -48,7 +48,7 @@ namespace Labb_4
                         AdoManager.PrintTeachers();
                         break;
                     case "5":
-                        AdoManager.SaveStaff();
+                        NewStaffInfo();
                         break;
                     case "6":
                         EFManager.StudentInfo();
@@ -105,6 +105,29 @@ namespace Labb_4
             string grade = Console.ReadLine().ToUpper();
 
             AdoManager.SetGrade(sid, tid, sub, grade);
+        }
+
+        internal static void NewStaffInfo()
+        {
+            Console.Clear();
+            Console.WriteLine("---- Add New Staff Member ----");
+
+            Console.Write("First Name: ");
+            string fName = Console.ReadLine();
+
+            Console.Write("Last Name: ");
+            string lName = Console.ReadLine();
+
+            Console.Write("Role ID (1:Teacher, 2:Principal, 3:Admin): ");
+            int rId = int.Parse(Console.ReadLine());
+
+            Console.Write("Department ID (1-4): ");
+            int dId = int.Parse(Console.ReadLine());
+
+            Console.Write("Salary: ");
+            decimal salary = decimal.Parse(Console.ReadLine());
+
+            AdoManager.NewStaff(fName, lName, rId, dId, salary);
         }
 
 
