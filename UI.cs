@@ -19,13 +19,13 @@ namespace Labb_4
                 Console.WriteLine("1.  Teachers per Department");
                 Console.WriteLine("2.  Student info");
                 Console.WriteLine("3.  List Active Courses");
-                Console.WriteLine("4.  Staff Overview");
+                Console.WriteLine("4.  Show Staff");
                 Console.WriteLine("5.  Add New Staff Member");
                 Console.WriteLine("6.  Student Grades Overview");
                 Console.WriteLine("7.  Monthly Salary per Department");
                 Console.WriteLine("8.  Average Salary per Department");
                 Console.WriteLine("9.  Get Student Info by ID");
-                Console.WriteLine("10. Set Grade with Transaction");
+                Console.WriteLine("10. Set Grade");
                 Console.WriteLine("0.  Exit");
                 Console.Write("\nSelect an option: ");
 
@@ -86,7 +86,7 @@ namespace Labb_4
                     return id;
                 }
 
-                Console.WriteLine("Invalid input. Please enter a numeric ID.");
+                Console.WriteLine("Invalid input. Please enter a valid ID.");
             }
         }
 
@@ -98,7 +98,7 @@ namespace Labb_4
             EFManager.StudentInfo();
 
             int sid = GetId("\nEnter Student ID: ");
-            int tid = GetId("Enter Teacher ID (Your ID): ");
+            int tid = GetId("Enter Teacher ID: ");
             int sub = GetId("Enter Subject ID: ");
 
             Console.Write("Enter Grade (A-F): ");
