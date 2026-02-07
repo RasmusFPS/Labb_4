@@ -99,7 +99,10 @@ namespace Labb_4
         {
             Console.Clear();
             Console.WriteLine("----Salary per Department----");
-            string query = "SELECT DepartmentName, SUM(Salary) as Total FROM Staff s JOIN Departments d on s.DepartmentID = d.DepartmentID GROUP BY DepartmentName";
+            string query = "SELECT DepartmentName, " +
+                           "SUM(Salary) as Total FROM Staff s " +
+                           "JOIN Departments d on s.DepartmentID = d.DepartmentID " +
+                           "GROUP BY DepartmentName";
 
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -128,7 +131,11 @@ namespace Labb_4
         {
             Console.Clear();
             Console.WriteLine("----Average Salary per Department----");
-            string query = "SELECT DepartmentName, AVG(Salary) as AverageSalary FROM Staff s JOIN Departments d on s.DepartmentID = d.DepartmentID GROUP BY DepartmentName";
+            string query = "SELECT DepartmentName, " +
+                           "AVG(Salary) as AverageSalary " +
+                           "FROM Staff s " +
+                           "JOIN Departments d on s.DepartmentID = d.DepartmentID " +
+                           "GROUP BY DepartmentName";
 
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -156,7 +163,7 @@ namespace Labb_4
         internal static void StudentDetails(int studentid)
         {
             Console.Clear();
-            Console.WriteLine("----Student Info (Stored Procedure)----");
+            Console.WriteLine("----Student Info----");
 
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -171,7 +178,6 @@ namespace Labb_4
                         {
                             if (reader.Read())
                             {
-                                // LOOPING THROUGH ALL COLUMNS (DYNAMIC)
                                 for (int i = 0; i < reader.FieldCount; i++)
                                 {
                                     Console.WriteLine($"{reader.GetName(i)}: {reader.GetValue(i)}");
@@ -214,7 +220,7 @@ namespace Labb_4
             Console.ReadKey();
         }
 
-        internal static void SaveStaffPrompt()
+        internal static void SaveStaff()
         {
             Console.Write("First Name: "); string fName = Console.ReadLine();
             Console.Write("Last Name: "); string lName = Console.ReadLine();
@@ -239,7 +245,7 @@ namespace Labb_4
         internal static void SetGrade(int studentId, int teacherId, int subjectId, string grade)
         {
             Console.Clear();
-            Console.WriteLine("----Set Grade (Transaction)----");
+            Console.WriteLine("----Set Grade----");
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
