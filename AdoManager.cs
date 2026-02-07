@@ -7,8 +7,7 @@ namespace Labb_4
 {
     internal class AdoManager
     {
-        private static readonly string _connectionString =
-            "Server=localhost;Database=Labb_4;Integrated Security=true;TrustServerCertificate=true;";
+        private static readonly string _connectionString = "Server=localhost;Database=Labb_4;Integrated Security=true;TrustServerCertificate=true;";
 
         internal static void PrintTeachers()
         {
