@@ -30,8 +30,7 @@ namespace Labb_4
                     }
                 }
 
-                Console.WriteLine("\nPress AnyKey to continue");
-                Console.ReadKey();
+                UI.WaitForInput();
             }
         }
 
@@ -71,8 +70,7 @@ namespace Labb_4
                     Console.WriteLine($"{c.SubjectName}");
                 }
 
-                Console.WriteLine("\nPress AnyKey to continue");
-                Console.ReadKey();
+                UI.WaitForInput();
             }
         }
     }

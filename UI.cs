@@ -38,8 +38,7 @@ namespace Labb_4
                         break;
                     case "2":
                         EFManager.StudentInfo();
-                        Console.WriteLine("\nPress AnyKey to continue");
-                        Console.ReadKey();
+                        UI.WaitForInput();
                         break;
                     case "3":
                         EFManager.ActiveCourses();
@@ -128,6 +127,12 @@ namespace Labb_4
             decimal salary = decimal.Parse(Console.ReadLine());
 
             AdoManager.NewStaff(fName, lName, rId, dId, salary);
+        }
+
+        internal static void WaitForInput()
+        {
+            Console.WriteLine("\nPress AnyKey to Continue");
+            Console.ReadKey();
         }
 
 

@@ -48,8 +48,7 @@ namespace Labb_4
                     catch (Exception ex) { Console.WriteLine(ex.Message); }
                 }
             }
-            Console.WriteLine("Press AnyKey to Continue");
-            Console.ReadKey();
+            UI.WaitForInput();
         }
 
         internal static void GetStudentGrades(int studentId)
@@ -102,8 +101,7 @@ namespace Labb_4
                     catch (Exception ex) { Console.WriteLine(ex.Message); }
                 }
             }
-            Console.WriteLine("\nPress AnyKey to Continue");
-            Console.ReadKey();
+            UI.WaitForInput();
         }
 
         internal static void GetSalary()
@@ -153,8 +151,7 @@ namespace Labb_4
                     catch (Exception ex) { Console.WriteLine(ex.Message); }
                 }
             }
-            Console.WriteLine("\nPress AnyKey to Continue");
-            Console.ReadKey();
+            UI.WaitForInput();
         }
 
         internal static void SetGrade(int sid, int tid, int sub, string grade)
@@ -188,8 +185,7 @@ namespace Labb_4
                     }
                 }
             }
-            Console.WriteLine("Press AnyKey to Continue");
-            Console.ReadKey();
+            UI.WaitForInput();
         }
 
         public static void ExecuteQuery(string query)
@@ -222,8 +218,7 @@ namespace Labb_4
                 }
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
-            Console.WriteLine("\nPress AnyKey to Continue");
-            Console.ReadKey();
+            UI.WaitForInput();
         }
     }
 }
